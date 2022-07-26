@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 {
     public TMP_Text coinText;
     public int coins = 0;
+    public int coletavel = 0;
+    public TMP_Text coletavelText;
     public float moveSpeed;
     public float maxVelocity;
 
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
         if (obj.action.name.CompareTo(_controle.Gameplay.Jump.name) == 0)
         {
-            if(obj.performed) Jump();
+            if (obj.performed) Jump();
         }
     }
 
@@ -117,8 +119,8 @@ public class PlayerController : MonoBehaviour
      */
     private void Jump()
     {
-        if(_isGrounded) _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        
+        if (_isGrounded) _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
     }
 
     private void CheckGround()
@@ -143,8 +145,23 @@ public class PlayerController : MonoBehaviour
         {
             coins++;
             PlayerObserverManager.playerCoinsChanged(coins);
-            
+
             Destroy(other.gameObject);
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        {
+            if (other.CompareTag("Coletavel"))
+            {
+                coletavel++;
+                coletavelText.text = coletavel.ToString();
+                Destroy(other.gameObject);
+            }
+        }
+    }
 }
+    
+   
+    
