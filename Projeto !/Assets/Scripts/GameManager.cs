@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] 
     private GameObject playerAnCameraPrefab;
 
-
     [SerializeField]
     private string locationToLoad;
 
-    [SerializeField] private String guiScene;
+    [SerializeField] 
+    private String guiScene;
 
 
 

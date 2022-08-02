@@ -10,8 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     public TMP_Text coinText;
     public int coins = 0;
-    public int coletavel = 0;
-    public TMP_Text coletavelText;
+    public int coletaveis = 0;
     public float moveSpeed;
     public float maxVelocity;
 
@@ -148,20 +147,14 @@ public class PlayerController : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
+        if (other.CompareTag("Coletavel"))
         {
-            if (other.CompareTag("Coletavel"))
-            {
-                coletavel++;
-                coletavelText.text = coletavel.ToString();
-                Destroy(other.gameObject);
-            }
+            coletaveis++;
+            PlayerObserverManager.playerColetavelChanged(coletaveis);
+            Destroy(other.gameObject);
         }
     }
 }
-    
-   
+
     
