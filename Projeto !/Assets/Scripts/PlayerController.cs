@@ -152,6 +152,7 @@ public class PlayerController : MonoBehaviour
         {
             coletaveis++;
             PlayerObserverManager.playerColetavelChanged(coletaveis);
+            
             Destroy(other.gameObject);
         }
     }

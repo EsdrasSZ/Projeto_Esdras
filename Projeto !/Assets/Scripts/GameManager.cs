@@ -8,6 +8,8 @@ using Scene = UnityEditor.SearchService.Scene;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     [SerializeField] 
     private GameObject playerAnCameraPrefab;
 
@@ -18,9 +20,42 @@ public class GameManager : MonoBehaviour
     private String guiScene;
 
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if(SceneManager.GetActiveScene().name == "Initialization")
+        {
+            StartGameFromInitialization();
+        } 
+        else
+        {
+            StartGameFromLevel();
+        }
+    }
+
+    private void StartGameFromLevel()
+    {
+        SceneManager.LoadScene(guiScene, LoadSceneMode.Additive);
+        
+        Vector3 starPosition = GameObject.Find("PlayerStart").transform.position;
+
+        Instantiate(playerAnCameraPrefab, starPosition, Quaternion.identity);
+    }
 
     // Start is called before the first frame update
-    void Start()
+    void StartGameFromInitialization()
     {
     
         DontDestroyOnLoad(this.gameObject);
