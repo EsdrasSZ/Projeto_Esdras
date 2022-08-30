@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public float initialTime;
     public TMP_Text coinText;
     public int coins = 0;
     public int coletaveis = 0;
@@ -25,6 +26,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
 
     private Vector2 _moveInput;
+
+    private float _timeRemaining;
+
+    private void Start()
+    {
+        _timeRemaining = initialTime;
+    }
 
     private bool _isGrounded;
 
@@ -130,6 +138,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        _timeRemaining -= Time.deltaTime;
+        
         CheckGround();
     }
 
@@ -154,6 +164,23 @@ public class PlayerController : MonoBehaviour
             PlayerObserverManager.playerColetavelChanged(coletaveis);
             
             Destroy(other.gameObject);
+        }
+    }
+
+    private void CheckVictory()
+    {
+        if (coins >= 10)
+        {
+            GameManager.instance.CallVictory();
+        }
+        
+    }
+
+    private void CheckGameOver()
+    {
+        if (_timeRemaining <= 0)
+        {
+            GameManager.instance.CallgameOver();
         }
     }
 }

@@ -54,8 +54,18 @@ public class GameManager : MonoBehaviour
         Instantiate(playerAnCameraPrefab, starPosition, Quaternion.identity);
     }
 
+    private void StartGameFromInitialization()
+    {
+        SceneManager.LoadScene("Splash");
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
     // Start is called before the first frame update
-    void StartGameFromInitialization()
+    public void StartGame()
     {
     
         DontDestroyOnLoad(this.gameObject);
@@ -85,6 +95,21 @@ public class GameManager : MonoBehaviour
             
        
 
+    }
+
+    public void CallVictory()
+    {
+        SceneManager.LoadScene("Victory", LoadSceneMode.Additive);
+    }
+
+    public void CallgameOver()
+    {
+        SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);
+    }
+
+    public void LoadEnding()
+    {
+        SceneManager.LoadScene("Ending");
     }
     
 }
