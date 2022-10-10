@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _timeRemaining -= Time.deltaTime;
-        
+
         CheckGround();
     }
 
@@ -162,27 +162,12 @@ public class PlayerController : MonoBehaviour
         {
             coletaveis++;
             PlayerObserverManager.playerColetavelChanged(coletaveis);
-            
+
             Destroy(other.gameObject);
         }
     }
-
-    private void CheckVictory()
-    {
-        if (coins >= 10)
-        {
-            GameManager.instance.CallVictory();
-        }
-        
-    }
-
-    private void CheckGameOver()
-    {
-        if (_timeRemaining <= 0)
-        {
-            GameManager.instance.CallgameOver();
-        }
-    }
 }
+
+    
 
     
